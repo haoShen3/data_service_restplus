@@ -1,5 +1,8 @@
-develop a Flask-Restplus data service that allows a client to read and store some publicly available economic indicator data for 
-    countries around the world, and allow the consumers to access the data through a REST API.
-The World Bank indicators API provides 50 year of data over more than 1500 indicators for countries around the world.
-List of indicators can be found at: http://api.worldbank.org/v2/indicators
-List of countries can be found at: http://api.worldbank.org/v2/countries
+I'm a student at University of New South Walse. I'm tring to build an API by rest-plus. This document is used to record my learning
+    experiences. 
+This is the Specification:
+    *develop a Flask-Restplus data service that allows a client to read and store some publicly available economic indicator data for 
+        countries around the world, and allow the consumers to access the data through a REST API.
+    *The World Bank indicators API provides 50 year of data over more than 1500 indicators for countries around the world.
+    *List of indicators can be found at: http://api.worldbank.org/v2/indicators
+    *List of countries can be found at: http://api.worldbank.org/v2/countries
