@@ -1,5 +1,3 @@
-I'm a student at University of New South Walse. I'm tring to build an API by rest-plus. This document is used to record my learning
-    experiences. 
 This is the Specification:
     *develop a Flask-Restplus data service that allows a client to read and store some publicly available economic indicator data for 
         countries around the world, and allow the consumers to access the data through a REST API.
