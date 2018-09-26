@@ -1,7 +1,0 @@
-This operation can be considered as an on-demand 'import' operation. The service will download the JSON data for all countries respective to the year 2012 to 2017 and identified by the indicator id given by the user and process the content into an internal data format and store it in the database ( mLab ).
-Parameters should be given to the endpoint (in the payload) by the user:
-indicator_id : an indicator http://api.worldbank.org/v2/indicators
-After importing the collection, the service should return a response containing at least the following information: 
-location : the URL with which the imported collection can be retrieved
-collection_id : a unique identifier automatically generated
-creation_time : the time the collection stored in the database
