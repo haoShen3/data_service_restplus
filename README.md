@@ -1,12 +1,17 @@
             Data Service for World Bank Economic Indicators
+            =======
+   * [PyMongo documents](https://api.mongodb.com/python/current/)
+   * [Flask-RESTPlus’s documentation](https://flask-restplus.readthedocs.io/en/stable/)
 Procedure:
-  1.Start a virtual environment and install requirements
-  2.Write app.py which is the API application that will be deployed
-  3.Configuration pymongo databse which is connected to mlab
-  4.Update requirements.txt as you write the code
-  5.Test the API
+--------
+  * Start a virtual environment and install requirements<br>
+  * Write app.py which is the API application that will be deployed<br>
+  * Configuration pymongo databse which is connected to mlab<br>
+  * Update requirements.txt as you write the code<br>
+  *Test the API<br>
 File Structure
-  *app_name
-    app.py: Flask API application
-    config.py: configuration pymongo database
-    requirements.txt: list of packages that the app will import
+---------
+  * app_name<br>
+    *       app.py: Flask API application<br>
+    *       config.py: configuration pymongo database<br>
+    *       requirements.txt: list of packages that the app will import<br>
