@@ -8,13 +8,15 @@ from bson import ObjectId
 import re
 
 
+
 DB_NAME = 'comp9321'
 DB_HOST = 'ds155862.mlab.com'
 DB_PORT = 55862
 DB_USER = 'admin2'
 DB_PASS = 'admin3'
 
-client = MongoClient(DB_HOST, DB_PORT)
+#connectioned to mlab database
+client = mlab(DB_HOST, DB_PORT).createClient()
 db = client[DB_NAME]
 db.authenticate(DB_USER, DB_PASS)
 countries = db['countries']
@@ -24,10 +26,12 @@ api = Api(app,
           title='WorldBank',
           description='collection will be imported if you input an indicator')
 
+# build api model
 indicator_model = api.model('id', {
     'indicator': fields.String
 })
 
+# argument parsing
 parser = reqparse.RequestParser()
 parser.add_argument('q', help=('this is an optional parameter'))
 
@@ -49,6 +53,7 @@ class Collections(Resource):
         new_collection = {}
         entry = []
         try:
+            #download data for two pages
             for page in range(1, 3):
                 response = requests.get(
                      'http://api.worldbank.org/v2/countries/all/indicators/{}?date=2012:2017&format=json&page={}'.\
@@ -61,6 +66,7 @@ class Collections(Resource):
                     country = {}
                     country["county"] = i['country']['value']
                     country["date"] = i['date']
+                    #if there is no values in this column, then changing it to -1
                     if not i['value']:
                         country['value'] = -1
                     else:
@@ -68,6 +74,7 @@ class Collections(Resource):
                     entry.append(country)
             new_collection["entries"] = entry
             collection_id = countries.insert_one(new_collection).inserted_id
+            # print the inserted collection
             # pprint.pprint(countries.find_one())
             # pprint.pprint(collection_id)
             segment = {}
@@ -76,7 +83,6 @@ class Collections(Resource):
             segment['indicator'] = id
             segment['creation_time'] = new_collection['creation_time']
             return segment, 201
-
         except Exception:
             return {"message": "the indicator = {} is not exist in the data service".format(id)}, 404
 
@@ -161,6 +167,7 @@ class GetListsCollections(Resource):
         collection = countries.find_one({'_id': ObjectId(collection_id)})
         if not collection:
             api.abort(404, {'message': "The collection = {} is not in the dataset".format(collection_id)})
+        # use parser and find the user's query
         args = parser.parse_args()
         ascending = args.get('q')
         entries = []
@@ -170,7 +177,9 @@ class GetListsCollections(Resource):
         if ascending:
             pattern = re.compile(r'\d+')
             N = pattern.search(ascending)
+            #get the number of returned results
             number = int(N.group(0))
+            #sorted dictionaries by their values
             entries = sorted(entries, key= lambda x: x.__getitem__('value'), reverse=True)
             if 'top' in ascending:
                 entries = entries[:number]
